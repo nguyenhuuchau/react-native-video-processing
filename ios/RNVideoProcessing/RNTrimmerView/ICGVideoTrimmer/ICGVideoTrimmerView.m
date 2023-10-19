@@ -169,7 +169,7 @@
         self.leftThumbView = [[ICGThumbView alloc] initWithFrame:leftThumbFrame color:self.themeColor right:NO];
     }
     
-    self.trackerView = [[UIView alloc] initWithFrame:CGRectMake(self.thumbWidth - self.trackerHandleHeight / 2, 0, 20, CGRectGetHeight(self.frameView.frame) + self.trackerHandleHeight)];
+    self.trackerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, CGRectGetHeight(self.frameView.frame) + self.trackerHandleHeight)];
     
     self.tracker = [[UIView alloc] initWithFrame:CGRectMake(self.thumbWidth, 0, 3, CGRectGetHeight(self.frameView.frame))];
     self.trackerHandle = [[UIView alloc] initWithFrame:CGRectMake(1, CGRectGetHeight(self.frameView.frame), self.trackerHandleHeight, self.trackerHandleHeight)];
@@ -391,8 +391,8 @@
     [self.contentView setFrame:CGRectMake(0, 0, contentViewFrameWidth, CGRectGetHeight(self.contentView.frame))];
     [self.scrollView setContentSize:self.contentView.frame.size];
     NSInteger minFramesNeeded = screenWidth / picWidth + 1;
-    actualFramesNeeded =  (duration / self.maxLength) * minFramesNeeded + 1;
-    
+    //actualFramesNeeded =  (duration / self.maxLength) * minFramesNeeded + 1;
+    actualFramesNeeded =  minFramesNeeded;
     Float64 durationPerFrame = duration / (actualFramesNeeded*1.0);
     self.widthPerSecond = frameViewFrameWidth / duration;
     
@@ -437,6 +437,7 @@
                 UIImageView *imageView = (UIImageView *)[self.frameView viewWithTag:i];
                 [imageView setContentMode:UIViewContentModeScaleAspectFill];
                 [imageView setImage:videoScreen];
+                imageView.clipsToBounds = YES;
                 
             });
         }
